@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <DefineConstants>$(DefineConstants);BUNDLER</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mono.Cecil" Version="0.11.3"  />
+  </ItemGroup>
+
+  <!-- shared files -->
+  <ItemGroup>
+    <Compile Include="..\common\MachO.cs">
+      <Link>tools\common\MachO.cs</Link>
+    </Compile>
+  </ItemGroup>
+
+</Project>

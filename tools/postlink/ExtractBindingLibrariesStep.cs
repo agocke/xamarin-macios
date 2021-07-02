@@ -3,11 +3,18 @@ using System.Collections.Generic;
 
 namespace Xamarin.Linker {
 
-	public class ExtractBindingLibrariesStep : ConfigurationAwareStep {
-		protected override string Name { get; } = "Extract Binding Libraries";
-		protected override int ErrorCode { get; } = 2340;
+	public class ExtractBindingLibrariesStep {
+		public LinkerConfiguration Configuration { get; }
 
-		protected override void TryEndProcess ()
+		public ExtractBindingLibrariesStep(LinkerConfiguration config)
+		{
+			Configuration = config;
+		}
+
+		protected string Name { get; } = "Extract Binding Libraries";
+		protected int ErrorCode { get; } = 2340;
+
+		protected void TryEndProcess ()
 		{
 			// No attributes are currently linked away, which means we don't need to worry about linked away LinkWith attributes.
 			// Ref: https://github.com/mono/linker/issues/952 (still open as of this writing).

@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using Mono.Cecil;
-using Mono.Tuner;
 using MonoTouch.Tuner;
 using ObjCRuntime;
 using Xamarin;
