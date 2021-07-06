@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <DefineConstants>$(DefineConstants);BUNDLER</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,9 +13,25 @@
 
   <!-- shared files -->
   <ItemGroup>
-    <Compile Include="..\common\MachO.cs">
-      <Link>tools\common\MachO.cs</Link>
-    </Compile>
+    <Compile Include="..\common\cache.cs" />
+    <Compile Include="..\common\error.cs" />
+    <Compile Include="..\common\ErrorHelper.tools.cs" />
+    <Compile Include="..\common\FileUtils.cs" />
+    <Compile Include="..\common\StringUtils.cs" />
+    <Compile Include="..\common\ApplePlatform.cs" />
+    <Compile Include="..\common\TargetFramework.cs" />
+    <Compile Include="..\common\FileCopier.cs" />
+    <Compile Include="..\mtouch\Errors.designer.cs" />
+    <Compile Include="..\common\Driver.execution.cs" />
+    <Compile Include="..\common\Execution.cs" />
+
+    <Compile Include="..\..\src\ObjCRuntime\Constants.cs" />
+    <Compile Include="..\..\src\ObjCRuntime\ArgumentSemantic.cs" />
+    <Compile Include="..\..\src\ObjCRuntime\LinkWithAttribute.cs" />
+    <Compile Include="..\..\src\ObjCRuntime\ErrorHelper.cs" />
+    <Compile Include="..\..\src\ObjCRuntime\PlatformAvailability2.cs" />
+    <Compile Include="..\..\src\Foundation\ExportAttribute.cs" />
+    <Compile Include="..\..\src\Foundation\ConnectAttribute.cs" />
   </ItemGroup>
 
 </Project>

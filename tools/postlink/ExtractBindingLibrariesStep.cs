@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Xamarin.Bundler;
 
 namespace Xamarin.Linker {
 
@@ -14,7 +16,7 @@ namespace Xamarin.Linker {
 		protected string Name { get; } = "Extract Binding Libraries";
 		protected int ErrorCode { get; } = 2340;
 
-		protected void TryEndProcess ()
+		public void TryEndProcess ()
 		{
 			// No attributes are currently linked away, which means we don't need to worry about linked away LinkWith attributes.
 			// Ref: https://github.com/mono/linker/issues/952 (still open as of this writing).
@@ -79,6 +81,16 @@ namespace Xamarin.Linker {
 				}
 			}
 			Configuration.WriteOutputForMSBuild ("_BindingLibraryLinkerFlags", linkerFlags);
+		}
+
+		static void Report (params Exception[] exceptions)
+			=> Report(exceptions);
+
+		public static void Report (IList<Exception> exceptions)
+		{
+			var list = ErrorHelper.CollectExceptions (exceptions);
+			// ErrorHelper.Show will print our errors and warnings to stderr.
+			ErrorHelper.Show (list);
 		}
 	}
 }

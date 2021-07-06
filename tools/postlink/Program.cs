@@ -1,4 +1,7 @@
 ﻿using System;
+using Mono.Cecil;
+using Xamarin.Bundler;
+using Xamarin.Linker;
 
 namespace postlink
 {
@@ -6,7 +9,16 @@ namespace postlink
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var target = new Target();
+            var config = new LinkerConfiguration(target);
+            foreach (var path in args)
+            {
+                var asmDef = AssemblyDefinition.ReadAssembly(path);
+                target.Assemblies.Add(new Assembly(target, asmDef));
+                config.FrameworkAssemblies.Add(path);
+            }
+            var extractStep = new ExtractBindingLibrariesStep(config);
+            extractStep.TryEndProcess();
         }
     }
 }

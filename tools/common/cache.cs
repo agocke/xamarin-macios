@@ -31,7 +31,7 @@ public class Cache {
 	public bool IsCacheTemporary {
 		get { return temporary_cache; }
 	}
-	
+
 	// see --cache=DIR
 	public string Location {
 		get {
@@ -62,7 +62,7 @@ public class Cache {
 			cache_dir = Target.GetRealPath (Path.GetFullPath (cache_dir));
 		}
 	}
-	
+
 	public void Clean ()
 	{
 #if DEBUG
@@ -148,13 +148,13 @@ public class Cache {
 
 		return FileUtils.CompareStreams (astream, bstream);
 	}
-	
+
 	string GetArgumentsForCacheData (Application app)
 	{
 		var sb = new StringBuilder ();
 		var args = new List<string> (arguments);
 
-		sb.Append ("# Version: ").Append (app.ProductConstants.Version).Append ('.').Append (app.ProductConstants.Revision).AppendLine ();
+		//sb.Append ("# Version: ").Append (app.ProductConstants.Version).Append ('.').Append (app.ProductConstants.Revision).AppendLine ();
 		sb.Append (Driver.GetFullPath ()).AppendLine (" \\");
 		CollectArgumentsForCache (args, 0, sb);
 		return sb.ToString ();
@@ -180,7 +180,7 @@ public class Cache {
 			default:
 				if (arg [0] == '@')
 					CollectArgumentsForCache (File.ReadAllLines (arg.Substring (1)), 0, sb);
-				
+
 				sb.Append ('\t').Append (StringUtils.Quote (arg)).AppendLine (" \\");
 				break;
 			}
@@ -245,7 +245,7 @@ public class Cache {
 
 			stream = File.OpenRead (filename);
 		}
-		
+
 		public override int Read (byte[] buffer, int offset, int count)
 		{
 			// read the header, always the same 136 bytes, followed by a 4 bytes timestamp (which we must ignore)
@@ -349,7 +349,7 @@ public class Cache {
 					/*uint metadataSize = */str.ReadUInt32 ();
 
 					// Find and read the metadata header
-					uint metadataRootPosition = metadataRVA - (virtualAddress - pointerToRawData); 
+					uint metadataRootPosition = metadataRVA - (virtualAddress - pointerToRawData);
 					str.BaseStream.Position = metadataRootPosition;
 					if (str.ReadByte () != 0x42 || str.ReadByte () != 0x53 || str.ReadByte () != 0x4a || str.ReadByte () != 0x42)
 						return; // Invalid magic signature.
@@ -454,7 +454,7 @@ public class Cache {
 				digests.Add (key, digest);
 			}
 		}
-		
+
 		Dictionary<string, HashSet<string>> dependencies = new Dictionary<string, HashSet<string>> ();
 		foreach (string a in assemblies) {
 			HashSet<string> references;
